@@ -1,13 +1,11 @@
 from selenium import webdriver
 import validators
-from selenium.webdriver.common.keys import Keys
 import time
 import send_email
-import config
 import os
 import json
 from urllib.request import *
-#import sys
+
 
 os.environ["PATH"] += os.pathsep + os.getcwd()
 download_path = "C:/Users/Sagnik Chatterjee/Desktop/abc/"
@@ -16,28 +14,28 @@ download_path = "C:/Users/Sagnik Chatterjee/Desktop/abc/"
 while (True):
 
     choice = input("Enter :\n 1. To send an email \n 2. To list out broken urls \n 3. To download images \n Enter your choice \n")
-    #print (choice==1)
+
     if (choice == "1"):
         sub = input("Enter your Subject : \t")
         msg = input("Enter your Message : \t")
         reciever = input("Enter recievers email: ")
-        send_email.email(sub,msg,reciever,config.PASSWORD)
-        #driver = webdriver.Firefox()
-        #driver.get("")
-        driver.quit()
+        send_email.email(sub,msg,reciever)
+
 
 
     elif (choice == "2"):
         broken = []
-        url = input("Enter the desired URL")
+        url = input("Enter the desired URL :")
         driver = webdriver.Firefox()
         driver.get(url)
         time.sleep(3)
         list_links = driver.find_elements_by_tag_name('a')
         for i in list_links:
-            url1 = i.get_attribute('href')
-            if not validators.url(url1):
+            url1 = str(i.get_attribute('href'))
+            if validators.url(url1) == False:
                 broken.append(url1)
+        if broken == []:
+            print("All links are OK.")
         for x in broken:
             print(x)
         driver.quit()
@@ -73,4 +71,6 @@ while (True):
         driver.quit()
 
 
-    else: break
+    else:
+        print("Sorry wrong input ; Exiting")
+        break
