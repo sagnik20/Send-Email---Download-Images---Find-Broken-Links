@@ -1,1 +1,1 @@
-# selenium-automation-fot-TSF
+# selenium-automation-for-TSF
