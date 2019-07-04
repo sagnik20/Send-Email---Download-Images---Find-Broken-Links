@@ -42,7 +42,7 @@ while (True):
 
 
     elif (choice == "3"):
-        image_count, downloaded_img_count = 0, 0
+        image_count = 0
         searchtext = input("Enter the keyword you want to search for : ")
         extensions = {"jpg", "jpeg", "png"}
         headers = {}
